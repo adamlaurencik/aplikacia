@@ -1,0 +1,200 @@
+{* This is the welcome page, you can delete it *}
+{* This is the welcome page, you can delete it *}
+{$ttl=0}
+{block content}
+    <div style="color: {if $amount>0}green{else}red{/if}">
+    <label for="whole-amount">Finančné zhodnotenie firmy:</label>        
+            <span >{$amount}</span>
+        <span class="glyphicon glyphicon-euro"></span>
+        <a n:href="Homepage:default" style="margin-left: 30px"><span class="glyphicon glyphicon-arrow-left"></span> Späť</a>
+    </div>     
+<br>
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th  style="text-align: center">Meno</th>
+            <th  style="text-align: center">Podiel</th>
+            <th  style="text-align: center">Percentá</th>
+            <th style="text-align: center">Suma</th>
+            <th  style="text-align: center">500<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">200<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">100<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">50<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">20<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">10<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">5<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">2<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">1<span class="glyphicon glyphicon-eur"></span></th>
+            <th  style="text-align: center">50¢</th>
+            <th  style="text-align: center">20¢</th>
+            <th  style="text-align: center">10¢</th>
+            <th  style="text-align: center">5¢</th>
+            <th  style="text-align: center">2¢</th>
+            <th  style="text-align: center">1¢</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr n:foreach="$persons as $person">
+            <th scope="row">{$j++}</th>
+            <td class="col-xs-3" style="text-align: center">
+                {$person->name}
+            </td>
+            <td style="text-align: center">              
+                {$person->part1}           
+                /
+                {$person->part2}
+            </td>
+            <td  style="text-align: center; vertical-align: middle">
+              {round($person->percentage,2)}%
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->amount}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['500']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['200']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['100']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['50']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['20']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['10']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['5']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['2']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['1']}
+              </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['0.5']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['0.2']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+               {$person->banknotes['0.1']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['0.05']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['0.02']}
+            </td>
+              <td  style="text-align: center; vertical-align: middle">
+                {$person->banknotes['0.01']}
+            </td>
+    <span class="hidden">{$ttl=$ttl+$person->amount}</span>
+        </tr> 
+    </tbody>
+</table>
+<br>
+<div align="left" width="100%"><b> Celkový počet mincí: </b></div>
+<br>
+<div class="row">
+<table id="money" class="table table-condensed table-hover col-xs-2">     
+    <thead>
+    <th>Bankovka</th>
+    <th>Počet</th>
+    <th>Suma</th>
+    </thead>
+    <tr>
+        <td>500€</td>
+        <td>{$whole['500']}</td>
+        <td>{$whole['500']*500}</td>
+    </tr>
+    <tr>
+        <td>200€</td>
+        <td>{$whole['200']}</td>
+        <td>{$whole['200']*200}</td>
+    </tr>
+    <tr>
+        <td>100€</td>
+        <td>{$whole['100']}</td>
+        <td>{$whole['100']*100}</td>
+    </tr>
+    <tr>
+        <td>50€</td>
+        <td>{$whole['50']}</td>
+        <td>{$whole['50']*50}</td>
+    </tr>
+    <tr>
+        <td>20€</td>
+        <td>{$whole['20']}</td>
+        <td>{$whole['20']*20}</td>
+    </tr>
+    <tr>
+        <td>10€</td>
+        <td>{$whole['10']}</td>
+        <td>{$whole['500']*10}</td>
+    </tr>
+    <tr>
+        <td>5€</td>
+        <td>{$whole['5']}</td>
+        <td>{$whole['5']*5}</td>
+    </tr>
+    <tr>
+        <td>2€</td>
+        <td>{$whole['2']}</td>
+        <td>{$whole['500']*2}</td>
+    </tr>
+    <tr>
+        <td>1€</td>
+        <td>{$whole['1']}</td>
+        <td>{$whole['1']}</td>
+    </tr>
+    <tr>
+        <td>50¢</td>
+        <td>{$whole['0.5']}</td>
+        <td>{$whole['0.5']*0.5}</td>
+    </tr>
+    <tr>
+        <td>20¢</td>
+        <td>{$whole['0.2']}</td>
+        <td>{$whole['0.2']*0.2}</td>
+    </tr>
+    <tr>
+        <td>10¢</td>
+        <td>{$whole['0.1']}</td>
+        <td>{$whole['0.1']*0.1}</td>
+    </tr>
+    <tr>
+        <td>5¢</td>
+        <td>{$whole['0.05']}</td>
+        <td>{$whole['0.05']*0.05}</td>
+    </tr>
+    <tr>
+        <td>2¢</td>
+        <td>{$whole['0.02']}</td>
+        <td>{$whole['0.02']*0.02}</td>
+    </tr>
+    <tr>
+        <td>1¢</td>
+        <td>{$whole['0.01']}</td>
+        <td>{$whole['0.01']*0.01}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <th>{$ttl}</th>
+    </tr>
+</table>
+    <div class="col-xs-2" style="margin-left: 30px">
+        <br>
+        <a href="{$basePath}/Vysledky.xlsx" download><img src="{$basePath}/images/exc.png" height="20px">Excel subor</a>
+    </div>
+</div>
+{/block}
+

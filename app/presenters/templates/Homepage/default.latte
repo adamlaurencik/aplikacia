@@ -1,0 +1,96 @@
+{block content}
+{form calculate}
+<div class="form-group form-inline">
+    <label for="whole-amount">Finančné zhodnotenie firmy:</label>
+    <div class="input-group">
+        {input value class=>'form-control', placeholder=>'Cena'}
+        <div class="input-group-addon"><span class="glyphicon glyphicon-euro"></span></div>
+    </div>
+        {input send class=>'btn btn-default send-input'}
+</div>
+        {if $form->hasErrors()}<span style="color:red">{$form->errors[0]}</span>{/if}
+        {/form}
+       
+<br>
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th class="col-xs-1" style="text-align: center">#</th>
+            <th class="col-xs-5" style="text-align: center">Meno</th>
+            <th class="col-xs-5" style="text-align: center">Podiel</th>
+            <th class="col-xs-1" style="text-align: center">Editovať/Vymazať</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr n:foreach="$persons as $person">
+            <td class="col-xs-1" style="text-align: center">{$j++}</td>
+           {if $edit==$person->id}
+             {form edit}
+                        <td class="col-xs-6" style="text-align: center">
+                            {input name class=>'form-control input-sm', placeholder=>'Meno', value=>"{$person->name}"}
+                        </td>
+                        <td class="col-xs-5"style="text-align: center">   
+                           {if $form->hasErrors()}
+                                {input part1 class=>' has-error input-sm col-sm-3'}
+                                /
+                                {input part2 class=>'has-error input-sm col-sm-3'}
+                            {else} 
+                                {input part1 class=>'input-sm col-sm-3', value=>"{$person->part1}"}
+                                /
+                                {input part2 class=>'input-sm col-sm-3', value=>"{$person->part2}"}
+                            {/if}
+                        </td>
+                        <td class="col-xs-1" style="text-align: center; vertical-align: middle">
+                            {input send class=>'btn btn-success'} / <a n:href="addNew! $new-1"><span class="glyphicon glyphicon-remove" style="color: red;"></span></a>
+                        </td>
+            {/form}  
+           {else}
+            <td class="col-xs-6" style="text-align: center">
+                {$person->name}
+            </td>
+            <td class="col-xs-5"style="text-align: center">              
+                {$person->part1}             
+                /
+                {$person->part2}   
+            </td>
+            
+            <td class="col-xs-1" style="text-align: center; vertical-align: middle">
+               <a n:href="Homepage:default $new, $person->id"><span class="glyphicon glyphicon-edit" style="color: blue;"></span></a>
+                 /  
+                <a n:href="delete! $person->id"> <span class="glyphicon glyphicon-remove" style="color: red;"></span></a>
+            </td> 
+            {/if}
+        </tr>
+        {snippet news}
+            {for $i=0; $i<$new; $i++}
+                <tr>
+                    <td class="col-xs-1" style="text-align: center">{(sizeof($persons))+$j++}</td>
+                    {form persons-$i}
+                        <td class="col-xs-6" style="text-align: center">
+                            {input name class=>'form-control input-sm', placeholder=>'Meno'}
+                        </td>
+                        <td class="col-xs-5"style="text-align: center">   
+
+                            {if $form->hasErrors()}
+                                {input part1 class=>' has-error input-sm col-sm-3'}
+                                /
+                                {input part2 class=>'has-error input-sm col-sm-3'}
+                            {else} 
+                                {input part1 class=>'input-sm col-sm-3'}
+                                /
+                                {input part2 class=>'input-sm col-sm-3'}
+                            {/if}
+                        </td>
+                        <td class="col-xs-1" style="text-align: center; vertical-align: middle">
+                            {input send class=>'btn btn-success'} / <a n:href="addNew! $new-1"><span class="glyphicon glyphicon-remove" style="color: red;"></span></a>
+                        </td>
+                    {/form}
+                </tr>
+            {/for}   
+        {/snippet}
+    </tbody>
+</table>
+
+<div width="100%" align="left"><a n:href="addNew! $new+1"><span class="glyphicon glyphicon-plus"></span>Pridať osobu</a></div>
+
+{/block}

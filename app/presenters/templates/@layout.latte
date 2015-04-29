@@ -1,0 +1,54 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+*}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>{ifset title}{include title|striptags} | {/ifset}Nette Sandbox</title>
+
+        <link rel="stylesheet" href="{$basePath}/css/style.css">
+        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        {block head}{/block}
+    </head>
+
+    <body>
+        <div class="container" align="center" style="margin-top: 30px">
+            <div class="col-xs-12">
+            {include content}
+            </div>
+        </div>
+        {snippet javaAjax}
+            <script>
+                // napojení po načtení ajaxu live validace
+                for (var i = 0; i < document.forms.length; i++) {
+                    Nette.initForm(document.forms[i]);
+                }
+            </script>
+        {/snippet}
+          <script type="text/javascript">
+            $(document).ready(function () {
+                $('[data-toggle="popover"]').popover({
+                    placement: 'bottom'
+                });
+                $(function () {
+                    $.nette.init();
+                });
+            });
+
+        </script>
+        {block scripts}
+        
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="{$basePath}/js/netteForms.js"></script>
+        <script src="{$basePath}/js/nette.ajax.js"></script>
+        <script src="{$basePath}/js/main.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        {/block}
+    </body>
+</html>
